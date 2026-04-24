@@ -36,6 +36,17 @@ Ein **RAG-System (Retrieval-Augmented Generation)**, das ausschließlich lokal l
 - [x] Vollständig selbst gehostet — keine Cloud-Abhängigkeiten
 - [x] DSGVO-konform nach Design
 
+## 📸 Anwendung
+
+![Chat-Interface](screenshots/chat-interface.png)
+*Fragen in natürlicher Sprache mit Quellenangaben*
+
+![Dokumentenverwaltung](screenshots/document-management.png)
+*Upload und Verwaltung von Verwaltungsdokumenten*
+
+![Nutzungsauswertung](screenshots/analytics-dashboard.png)
+*Statistiken und häufige Anfragen*
+
 ## Architektur
 
 ```
