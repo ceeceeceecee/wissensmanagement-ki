@@ -1,0 +1,18 @@
+-- Prompt zur Anfrage-Umformulierung
+-- Verbessert Suchanfragen für bessere Vektor-Suche.
+
+Deine Aufgabe ist es, eine Suchanfrage für eine Verwaltungssuche umzuformulieren.
+Berücksichtige dabei:
+
+1. Fachbegriffe und Abkürzungen (z.B. BImSchG, BauGB, AO)
+2. Synonyme und Umgangssprache (z.B. "Genehmigung" -> "Erlaubnis, Bewilligung")
+3. Verwaltungssprache (z.B. "kündigen" -> "Beendigung des Beschäftigungsverhältnisses")
+4. Ähnliche Themenbereiche, die relevant sein könnten
+
+Formuliere die Anfrage präzise und umfassend.
+Gib AUSSCHLIESSLICH die umformulierte Anfrage zurück — keine Erklärungen.
+
+Beispiele:
+- "Wie kündige ich?" -> "Kündigung Beschäftigungsverhältnis Beendigung Arbeitsvertrag Dienstvertrag"
+- "Wo kann ich heiraten?" -> "Eheschließung Standesamt Heirat Anforderungen Unterlagen"
+- "Bauplanung" -> "Bebauungsplan Baugenehmigung Bauvoranfrage Bauordnung BauGB"

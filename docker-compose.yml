@@ -1,0 +1,89 @@
+version: "3.8"
+
+services:
+  # Streamlit Webanwendung
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: wissensmanagement-app
+    ports:
+      - "8501:8501"
+    environment:
+      - OLLAMA_HOST=http://host.docker.internal:11434
+      - MODEL_NAME=${MODEL_NAME:-llama3}
+      - POSTGRES_URL=postgresql://wissens:wissens@postgres:5432/wissensmanagement
+      - DATA_PATH=/app/data
+      - CHROMA_PATH=/app/.chroma
+    volumes:
+      - app-data:/app/data
+      - chroma-data:/app/.chroma
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8501/_stcore/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # PostgreSQL Datenbank
+  postgres:
+    image: postgres:16-alpine
+    container_name: wissensmanagement-postgres
+    environment:
+      POSTGRES_USER: wissens
+      POSTGRES_PASSWORD: wissens
+      POSTGRES_DB: wissensmanagement
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U wissens -d wissensmanagement"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ChromaDB Vektordatenbank
+  chromadb:
+    image: chromadb/chroma:latest
+    container_name: wissensmanagement-chromadb
+    ports:
+      - "8000:8000"
+    volumes:
+      - chroma-data:/chroma/chroma
+    environment:
+      - IS_PERSISTENT=TRUE
+      - ANONYMIZED_TELEMETRY=FALSE
+    restart: unless-stopped
+
+  # Optional: Ollama KI-Server (lokal!)
+  # Auskommentieren und entkommentieren zum Aktivieren.
+  # WICHTIG: Ollama muss auf dem Host laufen für GPU-Zugriff,
+  # oder in diesem Container mit entsprechender GPU-Konfiguration.
+  #
+  # ollama:
+  #   image: ollama/ollama:latest
+  #   container_name: wissensmanagement-ollama
+  #   ports:
+  #     - "11434:11434"
+  #   volumes:
+  #     - ollama-data:/root/.ollama
+  #   deploy:
+  #     resources:
+  #       reservations:
+  #         devices:
+  #           - driver: nvidia
+  #             count: 1
+  #             capabilities: [gpu]
+  #   restart: unless-stopped
+
+volumes:
+  app-data:
+  postgres-data:
+  chroma-data:
+  # ollama-data:

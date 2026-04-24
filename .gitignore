@@ -1,0 +1,12 @@
+.env
+*.log
+__pycache__/
+*.pyc
+data/
+uploads/
+.chroma/
+venv/
+.vscode/
+.idea/
+*.swp
+*.swo
