@@ -28,6 +28,7 @@ RAG-basiertes Wissensmanagement für Kommunen. ChromaDB-Vektordatenbank, Ollama-
 | Streamlit | Web-Interface |
 | Ollama | LLM |
 | ChromaDB | Vektordatenbank |
+| PostgreSQL | Hauptdatenbank |
 | Docker | Deployment |
 
 ## Quick Start
