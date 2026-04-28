@@ -66,7 +66,7 @@ def initialisiere_komponenten():
 def zeige_sidebar():
     """Zeigt die Seitenleiste mit Rolle und Systeminfo."""
     with st.sidebar:
-        st.image("🏛️", width=80)
+        st.markdown("# 🏛️")
         st.title("Wissensmanagement")
         st.caption("Kommunale Verwaltung")
 
