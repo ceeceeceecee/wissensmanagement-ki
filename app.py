@@ -8,6 +8,11 @@ import time
 import tempfile
 from datetime import datetime
 
+# -- Unified Theme System --
+import sys, os as _theme_os
+sys.path.insert(0, _theme_os.path.dirname(_theme_os.path.abspath(__file__)))
+from theme import init_theme, theme_toggle_sidebar, app_footer
+
 import streamlit as st
 
 # RAG-Module laden
@@ -32,6 +37,8 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded",
 )
+
+init_theme()
 
 # Session State initialisieren
 if "chat_verlauf" not in st.session_state:
@@ -442,3 +449,9 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# -- Theme Toggle --
+theme_toggle_sidebar()
+
+# -- Footer --
+app_footer()
