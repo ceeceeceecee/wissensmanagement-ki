@@ -98,7 +98,7 @@ def zeige_sidebar():
 
         try:
             import requests
-            ollama_host = os.getenv("OLLAMA_HOST", "http://localhost:11434")
+            ollama_host = os.getenv("OLLAMA_HOST", os.getenv("OLLAMA_HOST", "http://localhost:11434"))
             antwort = requests.get(f"{ollama_host}/api/tags", timeout=5)
             if antwort.status_code == 200:
                 modelle = [m["name"] for m in antwort.json().get("models", [])]

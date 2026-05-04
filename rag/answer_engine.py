@@ -16,7 +16,7 @@ class AnswerEngine:
         ollama_host: Optional[str] = None,
         modell_name: Optional[str] = None,
     ):
-        self.ollama_host = ollama_host or os.getenv("OLLAMA_HOST", "http://localhost:11434")
+        self.ollama_host = ollama_host or os.getenv("OLLAMA_HOST", os.getenv("OLLAMA_HOST", "http://localhost:11434"))
         self.modell_name = modell_name or os.getenv("MODEL_NAME", "llama3")
         self.system_prompt = self._lade_prompt("prompts/rag_answer.txt")
         self.rewrite_prompt = self._lade_prompt("prompts/query_rewrite.txt")
